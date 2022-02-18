@@ -11,7 +11,7 @@ If you are not able to agree on these points, it is a sign that your group may b
 |----------|----------------------------------------|
 | Person 1 | [@The0therChad](https://github.com/The0therChad) |
 | Person 2 | [@maderaroja](https://github.com/maderaroja) |
-| Person 3 | [@harpreetkaurgugulani](https://github.com/harpreetkaurgugulani) |
+| Person 3 | [@harpreetkaurguglani](https://github.com/harpreetkaurguglani) |
 | Person 4 | [@tangaot](https://github.com/tangaot) |
 
 ## Participation
