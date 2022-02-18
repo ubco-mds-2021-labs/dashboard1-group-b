@@ -9,10 +9,10 @@ If you are not able to agree on these points, it is a sign that your group may b
 
 | Name     | GitHub Handle                          |
 |----------|----------------------------------------|
-| Person 1 | [@username](https://github.com/The0therChad) |
-| Person 2 | [@username](https://github.com/maderaroja) |
-| Person 3 | [@username](https://github.com/harpreetkaurgugulani) |
-| Person 4 | [@username](https://github.com/tangaot) |
+| Person 1 | [@The0therChad](https://github.com/The0therChad) |
+| Person 2 | [@maderaroja](https://github.com/maderaroja) |
+| Person 3 | [@harpreetkaurgugulani](https://github.com/harpreetkaurgugulani) |
+| Person 4 | [@tangaot](https://github.com/tangaot) |
 
 ## Participation
 
