@@ -1,15 +1,15 @@
-# Belgium`s energy consumption visualization (Group B)
+# Belgium's Energy Consumption Visualization (Group B)
 
 ## Team Members
 
 - Chad: one sentence about you!
-- Harpreet: Passionate mathematician on the lane of becoming a statistician.
-- Nelson: one sentence about you!
+- Harpreet: Passionate mathematician on the path of becoming a statistician.
+- Nelson: Definitely a data engineer on my right track in the near future.
 - Nyanda: one sentence about you!
 
 ## Describe your topic/interest in about 150-200 words
 
-It is really important for the electricity grid operators to determine the amount of electricity fed into the electricity grid otherwise it might lead to a power blackout. The served purpose for this visualization would be to help the energy management system of Belgium to determine the adequate size of photovoltaic and energy storage to diminish the power flow into the grid during the various seasons of the year. Moreover, since the data is collected from a low-energy house it would help the management to address the challenge and decide upon a minimum threshold per household for load control if required in any unforeseen emergency situation. For instance, in case the management is willing to perform certain changes in the services or is willing to keep the power grid under maintenance then they would require a backup system that has the capacity to handle the least amount of energy load per household which is dependent on that power grid which is under maintenance. Our main focus would be to help the team to find out only the necessary amount of energy required by a Belgium resident. Our app will allow the user/the operator`s supervising team to flexibly filter their search and view different aspects of the data by filtering and re-ordering on different variables.
+It is really important for the electricity grid operators to determine the amount of electricity fed into the electricity grid otherwise it might lead to a power blackout. The served purpose for this visualization would be to help the energy management system of Belgium to determine the adequate size of photovoltaic and energy storage to diminish the power flow into the grid during the various seasons of the year. Moreover, since the data is collected from a low-energy house it would help the management to address the challenge and decide upon a minimum threshold per household for load control if required in any unforeseen emergency situation. For instance, in case the management is willing to perform certain changes in the services or is willing to keep the power grid under maintenance then they would require a backup system that has the capacity to handle the least amount of energy load per household which is dependent on that power grid which is under maintenance. Our main focus would be to help the team to find out only the necessary amount of energy required by a Belgium resident. Our app will allow the user/the operator's supervising team to flexibly filter their search and view different aspects of the data by filtering and re-ordering on different variables.
 
 ## About this Dashboard
 
