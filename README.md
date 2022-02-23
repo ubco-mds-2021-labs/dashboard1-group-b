@@ -3,7 +3,7 @@
 ## Team Members
 
 - Chad: one sentence about you!
-- Harpreet one sentence about you!
+- Harpreet: Passionate mathematician on the lane of becoming a statistician.
 - Nelson: one sentence about you!
 - Nyanda: one sentence about you!
 
