@@ -16,7 +16,7 @@
 
 ## About this Dashboard
 
-{You can use this area for any images you want to include}
+The dashboard offers an interactive floorplan where the user can select which room they would like to display data for. The plot next to the floorplan updates with temperature and humidity plots for the selected room. Expanded plots are displayed below showing outdoor temperature and humidity data alongside energy usage for the house. Using a selection of sliders, users can set the time range for the data.
 
 <img src ="images/test.png" width="100px">
 
