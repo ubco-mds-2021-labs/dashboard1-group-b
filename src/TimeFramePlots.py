@@ -7,24 +7,23 @@ import altair as alt
 # Read in global data
 energydata = pd.read_csv("../data/energydata_complete.csv")
 
-# create a day of week column and month column
+# create a day of week column and month column and day column
 energydata['date'] = pd.to_datetime(energydata['date'])
 energydata['day_of_week'] = energydata["date"].dt.day_name()
 energydata['month'] = energydata["date"].dt.strftime('%b')
 energydata['day'] = energydata["date"].dt.date
 
-all_date = [datetime.strftime(x, "%Y-%m-%d") for x in energydata['day']]
-# get unique date
-unique_date = list(dict.fromkeys(all_date))
 
 app = Dash(__name__, external_stylesheets=['https://codepen.io/chriddyp/pen/bWLwgP.css'])
 
 
 def bar_plot_altair(start_date, end_date):
+    # select date range
     selected_data = energydata[(energydata['day'] <= end_date) & (energydata['day'] >= start_date)]
-
+    # group by day of week and sum the energy consumption
     selected_data = selected_data.groupby(['day_of_week']).sum().reset_index()
 
+    # make Appliances vs Day of week bar plot
     chart = alt.Chart(selected_data).mark_bar(color='#D35400', size=20).encode(
         x=alt.X('Appliances:Q', axis=alt.Axis(title='Appliances energy consumption in Wh')),
         y=alt.Y('day_of_week:N', axis=alt.Axis(title='Day of the week'),
@@ -37,7 +36,9 @@ def bar_plot_altair(start_date, end_date):
 
 
 def pie_chart(start_date, end_date):
+    # select date range
     selected_data = energydata[(energydata['day'] <= end_date) & (energydata['day'] >= start_date)]
+    # group by day of week and sum the energy consumption
     selected_data = selected_data.groupby(['day_of_week']).sum().reset_index()
 
     pie_chart = alt.Chart(selected_data).mark_arc(innerRadius=50).encode(
@@ -77,6 +78,7 @@ app.layout = html.Div([
     Input('my-date-picker-range', 'start_date'),
     Input('my-date-picker-range', 'end_date'))
 def update_output(start_date, end_date):
+    # convert the outputs to date object
     start_date_object = date.fromisoformat(start_date)
     end_date_object = date.fromisoformat(end_date)
     return (bar_plot_altair(start_date=start_date_object, end_date=end_date_object),
