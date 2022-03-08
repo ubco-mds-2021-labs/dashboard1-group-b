@@ -13,7 +13,6 @@ energydata['day_of_week'] = energydata["date"].dt.day_name()
 energydata['month'] = energydata["date"].dt.strftime('%b')
 energydata['day'] = energydata["date"].dt.date
 
-
 app = Dash(__name__, external_stylesheets=['https://codepen.io/chriddyp/pen/bWLwgP.css'])
 
 
@@ -41,12 +40,12 @@ def pie_chart(start_date, end_date):
     # group by day of week and sum the energy consumption
     selected_data = selected_data.groupby(['day_of_week']).sum().reset_index()
 
-    pie_chart = alt.Chart(selected_data).mark_arc(innerRadius=50).encode(
+    chart = alt.Chart(selected_data).mark_arc(innerRadius=50).encode(
         theta=alt.Theta(field="Appliances", type="quantitative"),
         color=alt.Color(field="day_of_week", type="nominal", legend=alt.Legend(title="Day of the week"),
                         sort=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']),
     )
-    return pie_chart.to_html()
+    return chart.to_html()
 
 
 app.layout = html.Div([
