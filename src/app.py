@@ -12,7 +12,7 @@ alt.renderers.enable("mimetype")
 # Handle large data sets without embedding them in the notebook
 alt.data_transformers.enable("data_server")
 
-data = pd.read_csv("./data/energydata_complete.csv")
+data = pd.read_csv("../data/energydata_complete.csv")
 
 data["date"] = pd.to_datetime(data["date"])
 
