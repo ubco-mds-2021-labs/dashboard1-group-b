@@ -187,7 +187,7 @@ def area_plot(start_date, end_date):
             color=alt.Color("variable"),
         )
         .properties(height=300, width=350, title="Energy Used in House")
-        .configure_axis(labelFontSize=14, titleFontSize=18)
+        .configure_axis(labelFontSize=14, titleFontSize=18).configure_mark(opacity=0.5)
     )
 
     return plot.to_html()
