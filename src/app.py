@@ -21,18 +21,8 @@ energydata["month"] = energydata["date"].dt.strftime("%b")
 energydata["day"] = energydata["date"].dt.date
 
 
-energy_data_subset = energydata[
-    [
-        "Appliances",
-        "lights",
-        "month",
-    ]
-]
-energy_data_subset = energy_data_subset.groupby("month", sort=False).sum().reset_index()
-energy_data_subset = pd.melt(
-    energy_data_subset, id_vars=["month"], value_vars=["Appliances", "lights"]
-)
-sort_order = ["Jan", "Feb", "Mar", "Apr", "May"]
+
+sort_order = ["January", "February", "March", "April", "May"]
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -170,12 +160,13 @@ def area_plot(start_date, end_date):
     ]
 
     energy_data_subset = selected_data[["Appliances", "lights", "date"]]
-    energy_data_subset["month_full"] = energy_data_subset["date"].dt.month_name()
+    energy_data_subset["month"] = energy_data_subset["date"].dt.month_name()
+
     energy_data_subset = (
-        energy_data_subset.groupby("month_full", sort=False).sum().reset_index()
+        energy_data_subset.groupby("month", sort=False).sum().reset_index()
     )
     energy_data_subset = pd.melt(
-        energy_data_subset, id_vars=["month_full"], value_vars=["Appliances", "lights"]
+        energy_data_subset, id_vars=["month"], value_vars=["Appliances", "lights"]
     )
 
     plot = (
