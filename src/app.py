@@ -20,6 +20,14 @@ energydata['day_of_week'] = energydata["date"].dt.day_name()
 energydata['month'] = energydata["date"].dt.strftime('%b')
 energydata['day'] = energydata["date"].dt.date
 
+energy_data['month'] = energy_data['date'].dt.month
+energy_data_subset=energy_data[['Appliances','lights','date']]
+energy_data_subset['month_full'] = energy_data_subset['date'].dt.month_name()
+energy_data_subset=energy_data_subset.groupby('month_full', sort=False).sum().reset_index()
+energy_data_subset=pd.melt(energy_data_subset,id_vars =['month_full'], value_vars=['Appliances', 'lights'])
+energy_data_subset.head()
+sort_order = ['January', 'February','March','April','May']
+
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 
@@ -87,7 +95,22 @@ def plot_temp_hum(start_date, end_date, room="T1RH_1"):
 
     return plot.to_html()
 
+  
+def area_plot(start_date,end_date):
+    
+    selected_data = energydata[(energydata['day'] <= end_date) & (energydata['day'] >= start_date)]
+    
+    plot = alt.Chart(energy_data_subset).mark_area().encode(
+        x = alt.X('month_full', sort = sort_order, axis = alt.Axis(title = 'Month', tickCount = 10, grid = False, labelAngle = -360),
+        scale = alt.Scale(zero = False, domain = list(sort_order))),
+        y = alt.Y('value', axis = alt.Axis(title = 'Energy use in Wh', grid = False),scale = alt.Scale(zero = False) ),
+        color = alt.Color('variable')
+        ).properties(height = 300, width = 500, title = "Energy Used in house"
+        ).configure_axis(labelFontSize = 14, titleFontSize = 18) 
 
+    return plot.to_html()
+
+  
 plot1 = html.Iframe(
     id="temp_hum",
     srcDoc=plot_temp_hum(start_date=energydata['day'].min(), end_date=energydata['day'].max()),
@@ -105,6 +128,7 @@ plot3 = html.Iframe(
     id='pie_chart',
     srcDoc=pie_chart(start_date=energydata['day'].min(), end_date=energydata['day'].max()),
     style={'border-width': '0', 'width': '100%', 'height': '400px'})
+
 
 app.layout = dbc.Container(
     [
