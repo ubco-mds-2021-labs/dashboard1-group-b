@@ -2,6 +2,7 @@ import dash
 import altair as alt
 import pandas as pd
 import dash_bootstrap_components as dbc
+import pathlib
 from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
@@ -12,7 +13,10 @@ alt.renderers.enable("mimetype")
 # Handle large data sets without embedding them in the notebook
 alt.data_transformers.enable("data_server")
 
-energydata = pd.read_csv("../data/energydata_complete.csv")
+
+root_dir = pathlib.Path(__file__).parent.parent
+file_path = root_dir.joinpath("data/energydata_complete.csv")
+energydata = pd.read_csv(file_path)
 
 # create a day of week column and month column and day column
 energydata["date"] = pd.to_datetime(energydata["date"])
