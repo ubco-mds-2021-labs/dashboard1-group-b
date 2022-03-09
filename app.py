@@ -22,7 +22,7 @@ app = dash.Dash(__name__, external_stylesheets = [dbc.themes.BOOTSTRAP])
 ## Plotting
 
 def plot_outsidetemp(xcol = 'T_out'):
-    chart = alt.Chart(data).mark_point().encode(
+    chart = alt.Chart(data).mark_area().encode(
         x=xcol,
         y='RH_out')
 
@@ -37,15 +37,15 @@ row = html.Div(
          dbc.Row(
             [
                 dbc.Col(html.Div(plot1)),
-                dbc.Col(html.Div("One of three plots")),
-                dbc.Col(html.Div("One of three plots")),
+                dbc.Col(html.Div("One of six plots")),
+                dbc.Col(html.Div("One of six plots")),
             ]
          ),
         dbc.Row(
             [
-                dbc.Col(html.Div("One of three columns")),
-                dbc.Col(html.Div("One of three columns")),
-                dbc.Col(html.Div("One of three columns")),
+                dbc.Col(html.Div("One of six plots")),
+                dbc.Col(html.Div("One of six plots")),
+                dbc.Col(html.Div("One of six plots")),
             ]
         ),
     ]
