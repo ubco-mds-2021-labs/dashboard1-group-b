@@ -1,7 +1,7 @@
 import dash
-import dash_bootstrap_components as dbc
 import altair as alt
 import pandas as pd
+import dash_bootstrap_components as dbc
 from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
@@ -12,21 +12,24 @@ alt.renderers.enable("mimetype")
 # Handle large data sets without embedding them in the notebook
 alt.data_transformers.enable("data_server")
 
-energydata = pd.read_csv("../data/energydata_complete.csv")
+energydata = pd.read_csv("./data/energydata_complete.csv")
 
 # create a day of week column and month column and day column
 energydata["date"] = pd.to_datetime(energydata["date"])
-energydata['day_of_week'] = energydata["date"].dt.day_name()
-energydata['month'] = energydata["date"].dt.strftime('%b')
-energydata['day'] = energydata["date"].dt.date
+energydata["day_of_week"] = energydata["date"].dt.day_name()
+energydata["month"] = energydata["date"].dt.strftime("%b")
+energydata["day"] = energydata["date"].dt.date
 
-energy_data['month'] = energy_data['date'].dt.month
-energy_data_subset=energy_data[['Appliances','lights','date']]
-energy_data_subset['month_full'] = energy_data_subset['date'].dt.month_name()
-energy_data_subset=energy_data_subset.groupby('month_full', sort=False).sum().reset_index()
-energy_data_subset=pd.melt(energy_data_subset,id_vars =['month_full'], value_vars=['Appliances', 'lights'])
+energy_data_subset = energydata[["Appliances", "lights", "date"]]
+energy_data_subset["month_full"] = energy_data_subset["date"].dt.month_name()
+energy_data_subset = (
+    energy_data_subset.groupby("month_full", sort=False).sum().reset_index()
+)
+energy_data_subset = pd.melt(
+    energy_data_subset, id_vars=["month_full"], value_vars=["Appliances", "lights"]
+)
 energy_data_subset.head()
-sort_order = ['January', 'February','March','April','May']
+sort_order = ["January", "February", "March", "April", "May"]
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
@@ -35,48 +38,94 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 # bar chart for day of week
 def bar_plot_altair(start_date, end_date):
     # select date range
-    selected_data = energydata[(energydata['day'] <= end_date) & (energydata['day'] >= start_date)]
+    selected_data = energydata[
+        (energydata["day"] <= end_date) & (energydata["day"] >= start_date)
+    ]
     # group by day of week and sum the energy consumption
-    selected_data = selected_data.groupby(['day_of_week']).sum().reset_index()
+    selected_data = selected_data.groupby(["day_of_week"]).sum().reset_index()
 
     # make Appliances vs Day of week bar plot
-    chart = alt.Chart(selected_data).mark_bar(color='#D35400', size=20).encode(
-        x=alt.X('Appliances:Q', axis=alt.Axis(title='Appliances energy consumption in Wh')),
-        y=alt.Y('day_of_week:N', axis=alt.Axis(title='Day of the week'),
-                sort=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
-    ).properties(
-        width=400,
-        height=300
+    chart = (
+        alt.Chart(selected_data)
+        .mark_bar(color="#D35400", size=20)
+        .encode(
+            x=alt.X(
+                "Appliances:Q",
+                axis=alt.Axis(title="Appliances energy consumption in Wh"),
+            ),
+            y=alt.Y(
+                "day_of_week:N",
+                axis=alt.Axis(title="Day of the week"),
+                sort=[
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday",
+                ],
+            ),
+        )
+        .properties(width=400, height=300)
     )
     return chart.to_html()
+
+
+def plot_outsidetemp(xcol="T_out"):
+    chart = alt.Chart(energydata).mark_area().encode(x=xcol, y="RH_out")
+
+    return chart.interactive().to_html()
 
 
 # pie chart for day of week
 def pie_chart(start_date, end_date):
     # select date range
-    selected_data = energydata[(energydata['day'] <= end_date) & (energydata['day'] >= start_date)]
+    selected_data = energydata[
+        (energydata["day"] <= end_date) & (energydata["day"] >= start_date)
+    ]
     # group by day of week and sum the energy consumption
-    selected_data = selected_data.groupby(['day_of_week']).sum().reset_index()
+    selected_data = selected_data.groupby(["day_of_week"]).sum().reset_index()
 
-    chart = alt.Chart(selected_data).mark_arc(innerRadius=50).encode(
-        theta=alt.Theta(field="Appliances", type="quantitative"),
-        color=alt.Color(field="day_of_week", type="nominal", legend=alt.Legend(title="Day of the week"),
-                        sort=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']),
-    ).configure_axis(grid=False).configure_view(strokeWidth=0)
+    chart = (
+        alt.Chart(selected_data)
+        .mark_arc(innerRadius=50)
+        .encode(
+            theta=alt.Theta(field="Appliances", type="quantitative"),
+            color=alt.Color(
+                field="day_of_week",
+                type="nominal",
+                legend=alt.Legend(title="Day of the week"),
+                sort=[
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday",
+                ],
+            ),
+        )
+        .configure_axis(grid=False)
+        .configure_view(strokeWidth=0)
+    )
     return chart.to_html()
 
 
 def plot_temp_hum(start_date, end_date, room="T1RH_1"):
     # select date range
-    selected_data = energydata[(energydata['day'] <= end_date) & (energydata['day'] >= start_date)]
+    selected_data = energydata[
+        (energydata["day"] <= end_date) & (energydata["day"] >= start_date)
+    ]
 
     room_temp = room[0:2]
     room_hum = room[2:6]
 
     temp = (
         alt.Chart(selected_data)
-            .mark_line(color="red")
-            .encode(
+        .mark_line(color="red")
+        .encode(
             alt.Y(f"{room_temp}:Q", title="Temperature"),
             alt.X("date", title="Date"),
         )
@@ -84,8 +133,8 @@ def plot_temp_hum(start_date, end_date, room="T1RH_1"):
 
     hum = (
         alt.Chart(selected_data)
-            .mark_line(color="blue")
-            .encode(
+        .mark_line(color="blue")
+        .encode(
             alt.Y(f"{room_hum}:Q", title="Humidity"),
             alt.X("date", title="Date"),
         )
@@ -95,90 +144,170 @@ def plot_temp_hum(start_date, end_date, room="T1RH_1"):
 
     return plot.to_html()
 
-  
-def area_plot(start_date,end_date):
-    
-    selected_data = energydata[(energydata['day'] <= end_date) & (energydata['day'] >= start_date)]
-    
-    plot = alt.Chart(energy_data_subset).mark_area().encode(
-        x = alt.X('month_full', sort = sort_order, axis = alt.Axis(title = 'Month', tickCount = 10, grid = False, labelAngle = -360),
-        scale = alt.Scale(zero = False, domain = list(sort_order))),
-        y = alt.Y('value', axis = alt.Axis(title = 'Energy use in Wh', grid = False),scale = alt.Scale(zero = False) ),
-        color = alt.Color('variable')
-        ).properties(height = 300, width = 500, title = "Energy Used in house"
-        ).configure_axis(labelFontSize = 14, titleFontSize = 18) 
+
+def area_plot(start_date, end_date):
+
+    selected_data = energydata[
+        (energydata["day"] <= end_date) & (energydata["day"] >= start_date)
+    ]
+
+    plot = (
+        alt.Chart(energy_data_subset)
+        .mark_area()
+        .encode(
+            x=alt.X(
+                "month_full",
+                sort=sort_order,
+                axis=alt.Axis(title="Month", tickCount=10, grid=False, labelAngle=-360),
+                scale=alt.Scale(zero=False, domain=list(sort_order)),
+            ),
+            y=alt.Y(
+                "value",
+                axis=alt.Axis(title="Energy use in Wh", grid=False),
+                scale=alt.Scale(zero=False),
+            ),
+            color=alt.Color("variable"),
+        )
+        .properties(height=300, width=500, title="Energy Used in house")
+        .configure_axis(labelFontSize=14, titleFontSize=18)
+    )
 
     return plot.to_html()
 
-  
-plot1 = html.Iframe(
+
+temp_hum = html.Iframe(
     id="temp_hum",
-    srcDoc=plot_temp_hum(start_date=energydata['day'].min(), end_date=energydata['day'].max()),
+    srcDoc=plot_temp_hum(
+        start_date=energydata["day"].min(), end_date=energydata["day"].max()
+    ),
     style={"width": "100%", "height": "400px"},
 )
 
 # bar chart for day of week
-plot2 = html.Iframe(
-    id='barchart',
-    srcDoc=bar_plot_altair(start_date=energydata['day'].min(), end_date=energydata['day'].max()),
-    style={'border-width': '0', 'width': '100%', 'height': '400px'})
+energy_bar = html.Iframe(
+    id="barchart",
+    srcDoc=bar_plot_altair(
+        start_date=energydata["day"].min(), end_date=energydata["day"].max()
+    ),
+    style={"width": "100%", "height": "400px"},
+)
 
 # pie chart for day of week
-plot3 = html.Iframe(
-    id='pie_chart',
-    srcDoc=pie_chart(start_date=energydata['day'].min(), end_date=energydata['day'].max()),
-    style={'border-width': '0', 'width': '100%', 'height': '400px'})
+energy_pie = html.Iframe(
+    id="pie_chart",
+    srcDoc=pie_chart(
+        start_date=energydata["day"].min(), end_date=energydata["day"].max()
+    ),
+    style={"width": "100%", "height": "400px"},
+)
 
+temp_hum_out = html.Iframe(
+    id="altair_chart",
+    srcDoc=plot_outsidetemp(xcol="T_out"),
+    style={"width": "100%", "height": "400px"},
+)
+
+energy_month = html.Iframe(
+    id="energy_month",
+    srcDoc=area_plot(
+        start_date=energydata["day"].min(), end_date=energydata["day"].max()
+    ),
+    style={"width": "100%", "height": "400px"},
+)
+
+random_text = dcc.Markdown(
+    """
+
+        # Energy Use of Appliance in a Low-Energy House
+        
+        Collaborators  
+        Harpreet Kaur  
+        Chad Wheeler  
+        Neslson Tang  
+        Nyanda Redwood   
+
+        
+        """
+)
+
+# dropdown to select room
+room_dropdown = dcc.Dropdown(
+    id="room",
+    value="T1RH_1",
+    options=[
+        {"label": "Room 1", "value": "T1RH_1"},
+        {"label": "Room 2", "value": "T2RH_2"},
+        {"label": "Room 3", "value": "T3RH_3"},
+        {"label": "Room 4", "value": "T4RH_4"},
+        {"label": "Room 5", "value": "T5RH_5"},
+        {"label": "Room 6", "value": "T6RH_6"},
+        {"label": "Room 7", "value": "T7RH_7"},
+        {"label": "Room 8", "value": "T8RH_8"},
+        {"label": "Room 9", "value": "T9RH_9"},
+    ],
+    clearable=False,
+)
+
+# date range controller
+date_picker = dcc.DatePickerRange(
+    id="my-date-picker-range",
+    min_date_allowed=date(2016, 1, 11),
+    max_date_allowed=date(2016, 5, 27),
+    initial_visible_month=date(2016, 1, 11),
+    start_date=date(2016, 1, 11),
+    end_date=date(2016, 5, 27),
+)
+
+row = html.Div(
+    [
+        dbc.Row(
+            [
+                dbc.Col(html.Div([date_picker, room_dropdown])),
+                dbc.Col(html.Div(temp_hum)),
+                dbc.Col(html.Div(temp_hum_out)),
+            ]
+        ),
+        dbc.Row(
+            [
+                dbc.Col(html.Div(energy_bar)),
+                dbc.Col(html.Div(energy_pie)),
+                dbc.Col(html.Div(energy_month)),
+            ]
+        ),
+    ]
+)
 
 app.layout = dbc.Container(
     [
-        dcc.Dropdown(
-            id="room",
-            value="T1RH_1",
-            options=[
-                {"label": "Room 1", "value": "T1RH_1"},
-                {"label": "Room 2", "value": "T2RH_2"},
-                {"label": "Room 3", "value": "T3RH_3"},
-                {"label": "Room 4", "value": "T4RH_4"},
-                {"label": "Room 5", "value": "T5RH_5"},
-                {"label": "Room 6", "value": "T6RH_6"},
-                {"label": "Room 7", "value": "T7RH_7"},
-                {"label": "Room 8", "value": "T8RH_8"},
-                {"label": "Room 9", "value": "T9RH_9"},
-            ],
-            clearable=False,
+        random_text,
+        html.Div(
+            [
+                row,
+            ]
         ),
-        # date range controller
-        dcc.DatePickerRange(
-            id='my-date-picker-range',
-            min_date_allowed=date(2016, 1, 11),
-            max_date_allowed=date(2016, 5, 27),
-            initial_visible_month=date(2016, 1, 11),
-            start_date=date(2016, 1, 11),
-            end_date=date(2016, 5, 27)
-        ),
-        plot1,  # temp and hum plot for different room
-        plot2,  # bar chart for day of week
-        plot3,  # pie chart for day of week
     ]
 )
 
 
 @app.callback(
     Output("temp_hum", "srcDoc"),
-    Output('barchart', 'srcDoc'),
-    Output('pie_chart', 'srcDoc'),
+    Output("barchart", "srcDoc"),
+    Output("pie_chart", "srcDoc"),
     Input("room", "value"),
-    Input('my-date-picker-range', 'start_date'),
-    Input('my-date-picker-range', 'end_date')
+    Input("my-date-picker-range", "start_date"),
+    Input("my-date-picker-range", "end_date"),
 )
 def update_output(room, start_date, end_date):
     # convert the outputs to date object
     start_date_object = date.fromisoformat(start_date)
     end_date_object = date.fromisoformat(end_date)
-    return (plot_temp_hum(start_date=start_date_object, end_date=end_date_object, room=room),
-            bar_plot_altair(start_date=start_date_object, end_date=end_date_object),
-            pie_chart(start_date=start_date_object, end_date=end_date_object))
+    return (
+        plot_temp_hum(
+            start_date=start_date_object, end_date=end_date_object, room=room
+        ),
+        bar_plot_altair(start_date=start_date_object, end_date=end_date_object),
+        pie_chart(start_date=start_date_object, end_date=end_date_object),
+    )
 
 
 if __name__ == "__main__":
