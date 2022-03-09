@@ -7,6 +7,7 @@ from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
 from datetime import date
+from altair_data_server import data_server
 
 # Save a vega-lite spec and a PNG blob for each plot in the notebook
 alt.renderers.enable("mimetype")
