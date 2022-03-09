@@ -1,0 +1,5 @@
+add opacity to the plot
+make nyanada`s plot not as area but as line
+changes in the additional file
+
+> add limitation of colour scheme sync

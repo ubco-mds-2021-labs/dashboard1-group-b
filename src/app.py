@@ -6,13 +6,14 @@ import pathlib
 from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
+from altair_data_server import data_server
 from datetime import date
 
 # Save a vega-lite spec and a PNG blob for each plot in the notebook
 alt.renderers.enable("mimetype")
 # Handle large data sets without embedding them in the notebook
-alt.data_transformers.enable("data_server")
-
+#alt.data_transformers.enable("data_server")
+alt.data_transformers.enable('json')
 
 root_dir = pathlib.Path(__file__).parent.parent
 file_path = root_dir.joinpath("data/energydata_complete.csv")
