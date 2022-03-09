@@ -21,8 +21,7 @@ energydata["month"] = energydata["date"].dt.strftime("%b")
 energydata["day"] = energydata["date"].dt.date
 
 
-
-sort_order = ["January", "February", "March", "April", "May"]
+sort_order = ["Jan", "Feb", "Mar", "Apr", "May"]
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -70,17 +69,22 @@ def plot_outsidetemp(start_date, end_date, xcol="T_out"):
     # select date range
     selected_data = energydata[
         (energydata["day"] <= end_date) & (energydata["day"] >= start_date)
-        ]
-    chart = alt.Chart(selected_data).mark_area().encode(
-        x=alt.X(
-            xcol,
-            axis=alt.Axis(title="Temperature Outside in Celsius"),
-        ),
-        y=alt.X(
-            "RH_out",
-            axis=alt.Axis(title="Humidity outside in %"),
+    ]
+    chart = (
+        alt.Chart(selected_data)
+        .mark_area()
+        .encode(
+            x=alt.X(
+                xcol,
+                axis=alt.Axis(title="Temperature Outside in Celsius"),
+            ),
+            y=alt.X(
+                "RH_out",
+                axis=alt.Axis(title="Humidity outside in %"),
+            ),
         )
-    ).properties(width=350, height=300, title="Outside Temperature vs Humidity")
+        .properties(width=350, height=300, title="Outside Temperature vs Humidity")
+    )
 
     return chart.interactive().to_html()
 
@@ -134,7 +138,7 @@ def plot_temp_hum(start_date, end_date, room="T1RH_1"):
         alt.Chart(selected_data)
         .mark_line(color="red")
         .encode(
-            alt.Y(f"{room_temp}:Q", title="Temperature"),
+            alt.Y(room_temp + ":Q", title="Temperature"),
             alt.X("date", title="Date"),
         )
     )
@@ -143,12 +147,16 @@ def plot_temp_hum(start_date, end_date, room="T1RH_1"):
         alt.Chart(selected_data)
         .mark_line(color="blue")
         .encode(
-            alt.Y(f"{room_hum}:Q", title="Humidity"),
+            alt.Y(room_hum + ":Q", title="Humidity"),
             alt.X("date", title="Date"),
         )
     )
 
-    plot = alt.layer(temp, hum).resolve_scale(y="independent").properties(width=320, height=300, title="Temperature and Humidity Trend")
+    plot = (
+        alt.layer(temp, hum)
+        .resolve_scale(y="independent")
+        .properties(width=320, height=300, title="Temperature and Humidity Trend")
+    )
 
     return plot.to_html()
 
@@ -159,8 +167,7 @@ def area_plot(start_date, end_date):
         (energydata["day"] <= end_date) & (energydata["day"] >= start_date)
     ]
 
-    energy_data_subset = selected_data[["Appliances", "lights", "date"]]
-    energy_data_subset["month"] = energy_data_subset["date"].dt.month_name()
+    energy_data_subset = selected_data[["Appliances", "lights", "month"]]
 
     energy_data_subset = (
         energy_data_subset.groupby("month", sort=False).sum().reset_index()
@@ -176,12 +183,24 @@ def area_plot(start_date, end_date):
             x=alt.X(
                 "month",
                 sort=sort_order,
-                axis=alt.Axis(title="Month", tickCount=10, grid=False, labelAngle=-360, titleFontSize= 12,labelFontSize= 10),
+                axis=alt.Axis(
+                    title="Month",
+                    tickCount=10,
+                    grid=False,
+                    labelAngle=-360,
+                    titleFontSize=12,
+                    labelFontSize=10,
+                ),
                 scale=alt.Scale(zero=False, domain=list(sort_order)),
             ),
             y=alt.Y(
                 "value",
-                axis=alt.Axis(title="Energy use in Wh", grid=False, titleFontSize= 12, labelFontSize= 10),
+                axis=alt.Axis(
+                    title="Energy use in Wh",
+                    grid=False,
+                    titleFontSize=12,
+                    labelFontSize=10,
+                ),
                 scale=alt.Scale(zero=False),
             ),
             color=alt.Color("variable"),
@@ -222,7 +241,9 @@ energy_pie = html.Iframe(
 temp_hum_out = html.Iframe(
     id="altair_chart",
     srcDoc=plot_outsidetemp(
-        start_date=energydata["day"].min(), end_date=energydata["day"].max(), xcol="T_out"
+        start_date=energydata["day"].min(),
+        end_date=energydata["day"].max(),
+        xcol="T_out",
     ),
     style={"width": "100%", "height": "400px"},
 )
@@ -304,8 +325,11 @@ row = html.Div(
     [
         dbc.Row(
             [
-
-                dbc.Col(html.Div([random_text, date_range, date_picker, pick_room, room_dropdown])),
+                dbc.Col(
+                    html.Div(
+                        [random_text, date_range, date_picker, pick_room, room_dropdown]
+                    )
+                ),
                 dbc.Col(html.Div(temp_hum)),
                 dbc.Col(html.Div(temp_hum_out)),
             ]
@@ -352,8 +376,10 @@ def update_output(room, start_date, end_date):
         ),
         bar_plot_altair(start_date=start_date_object, end_date=end_date_object),
         pie_chart(start_date=start_date_object, end_date=end_date_object),
-        plot_outsidetemp(start_date=start_date_object, end_date=end_date_object,xcol="T_out"),
-        area_plot(start_date=start_date_object, end_date=end_date_object)
+        plot_outsidetemp(
+            start_date=start_date_object, end_date=end_date_object, xcol="T_out"
+        ),
+        area_plot(start_date=start_date_object, end_date=end_date_object),
     )
 
 
