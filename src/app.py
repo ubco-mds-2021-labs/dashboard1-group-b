@@ -34,7 +34,7 @@ def bar_plot_altair(start_date, end_date):
     # select date range
 
     """
-    Presents the plot for day_of_week and sums the energy consumption. 
+    Presents the plot for day_of_week and sums of the energy consumped separately for all the day of that week. 
 
     Parameters
     ----------
