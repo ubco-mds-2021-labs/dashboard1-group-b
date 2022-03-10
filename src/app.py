@@ -41,6 +41,8 @@ def bar_plot_altair(start_date, end_date):
     df : pd.DataFrame(selected_data)
         Groups the initial 
         energydata_complete data by day_of_week.
+    start_date : start date selected
+    end_date : end date selected
 
     Returns
     -------
@@ -93,6 +95,8 @@ def plot_outsidetemp(start_date, end_date, xcol="T_out"):
     ----------
     df : pd.DataFrame
         Uses initial energydata_complete data.
+    start_date : start date selected
+    end_date : end date selected
 
     Returns
     -------
@@ -134,6 +138,8 @@ def pie_chart(start_date, end_date):
     ----------
     df : pd.DataFrame(selected_data)
         Groups the initial dataframe by day_of_week.
+    start_date : start date selected
+    end_date : end date selected
 
     Returns
     -------
@@ -185,6 +191,8 @@ def plot_temp_hum(start_date, end_date, room="T1RH_1"):
     ----------
     df : pd.DataFrame(selected_data)
         Uses initial energydata_complete data.
+    start_date : start date selected
+    end_date : end date selected
 
     Returns
     -------
@@ -235,7 +243,9 @@ def area_plot(start_date, end_date):
     Parameters
     ----------
     df : pd.DataFrame(selected_data)
-        Groups the initial energydata_complete data by month name.
+        Subset of the initial energydata_complete data by month name.
+    start_date : start date selected
+    end_date : end date selected
 
     Returns
     -------
@@ -401,6 +411,7 @@ date_picker = dcc.DatePickerRange(
     end_date=date(2016, 5, 27),
 )
 
+# layout 
 row = html.Div(
     [
         dbc.Row(
@@ -448,6 +459,22 @@ app.layout = dbc.Container(
 )
 def update_output(room, start_date, end_date):
     # convert the outputs to date object
+
+    """
+    Presents the output by modifying it as per users selection
+
+    Parameters
+    ----------
+    start_date : start date selected
+    end_date : end date selected
+    room : room selected
+
+    Returns
+    -------
+    Presents the area chart for the energy consumed by lights and appliances.
+
+    """ 
+
     start_date_object = date.fromisoformat(start_date)
     end_date_object = date.fromisoformat(end_date)
     return (
