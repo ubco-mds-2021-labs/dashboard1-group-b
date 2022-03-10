@@ -184,7 +184,7 @@ def plot_temp_hum(start_date, end_date, room="T1RH_1"):
     Parameters
     ----------
     df : pd.DataFrame(selected_data)
-        Groups the initial dataframe by day_of_week.
+        Uses initial energydata_complete data.
 
     Returns
     -------
