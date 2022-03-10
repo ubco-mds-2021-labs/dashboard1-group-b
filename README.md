@@ -1,5 +1,11 @@
 # Belgium's Energy Consumption Visualization (Group B)
 
+### Deployed App Links
+
+Chad Wheeler: [https://py-prototype.herokuapp.com/](https://py-prototype.herokuapp.com/)
+
+Nelson Tang: [https://data551-milestone2.herokuapp.com/](https://data551-milestone2.herokuapp.com/)
+
 ## Who are we
 
 - Chad: "An intelligent and witty person that works on the betterment of oneself and those around him." -Jacob
