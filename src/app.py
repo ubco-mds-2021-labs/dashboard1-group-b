@@ -128,7 +128,7 @@ def pie_chart(start_date, end_date):
     # select date range
 
     """
-    Presents the trend describing a comparitive study of the temperature and humidity outside.
+    Presents the day of the week proportion summary of the energy consumed by the appliances in the house.
 
     Parameters
     ----------
@@ -177,6 +177,21 @@ def pie_chart(start_date, end_date):
 
 def plot_temp_hum(start_date, end_date, room="T1RH_1"):
     # select date range
+
+    """
+    Presents the temperature and humidity comparision in relation to the date.
+
+    Parameters
+    ----------
+    df : pd.DataFrame(selected_data)
+        Groups the initial dataframe by day_of_week.
+
+    Returns
+    -------
+    Presents the trend charts for the temperature and humidity.
+
+    """
+
     selected_data = energydata[
         (energydata["day"] <= pd.to_datetime(end_date))
         & (energydata["day"] >= pd.to_datetime(start_date))
