@@ -9,13 +9,7 @@ from dash.dependencies import Input, Output
 from datetime import date
 
 
-alt.renderers.enable("mimetype")
-
-alt.data_transformers.enable("data_server_proxied")
-
-# alt.data_transformers.enable("json")
-
-# alt.data_transformers.disable_max_rows()
+alt.data_transformers.disable_max_rows()
 
 
 root_dir = pathlib.Path(__file__).parent.parent
@@ -27,7 +21,7 @@ energydata["date"] = pd.to_datetime(energydata["date"])
 energydata["day_of_week"] = energydata["date"].dt.day_name()
 energydata["month"] = energydata["date"].dt.strftime("%b")
 energydata["day"] = energydata["date"].dt.date
-
+energydata["day"] = pd.to_datetime(energydata["day"])
 
 sort_order = ["Jan", "Feb", "Mar", "Apr", "May"]
 
@@ -41,7 +35,8 @@ server = app.server
 def bar_plot_altair(start_date, end_date):
     # select date range
     selected_data = energydata[
-        (energydata["day"] <= end_date) & (energydata["day"] >= start_date)
+        (energydata["day"] <= pd.to_datetime(end_date))
+        & (energydata["day"] >= pd.to_datetime(start_date))
     ]
     # group by day of week and sum the energy consumption
     selected_data = selected_data.groupby(["day_of_week"]).sum().reset_index()
@@ -77,7 +72,8 @@ def bar_plot_altair(start_date, end_date):
 def plot_outsidetemp(start_date, end_date, xcol="T_out"):
     # select date range
     selected_data = energydata[
-        (energydata["day"] <= end_date) & (energydata["day"] >= start_date)
+        (energydata["day"] <= pd.to_datetime(end_date))
+        & (energydata["day"] >= pd.to_datetime(start_date))
     ]
     chart = (
         alt.Chart(selected_data)
@@ -102,7 +98,8 @@ def plot_outsidetemp(start_date, end_date, xcol="T_out"):
 def pie_chart(start_date, end_date):
     # select date range
     selected_data = energydata[
-        (energydata["day"] <= end_date) & (energydata["day"] >= start_date)
+        (energydata["day"] <= pd.to_datetime(end_date))
+        & (energydata["day"] >= pd.to_datetime(start_date))
     ]
     # group by day of week and sum the energy consumption
     selected_data = selected_data.groupby(["day_of_week"]).sum().reset_index()
@@ -137,7 +134,8 @@ def pie_chart(start_date, end_date):
 def plot_temp_hum(start_date, end_date, room="T1RH_1"):
     # select date range
     selected_data = energydata[
-        (energydata["day"] <= end_date) & (energydata["day"] >= start_date)
+        (energydata["day"] <= pd.to_datetime(end_date))
+        & (energydata["day"] >= pd.to_datetime(start_date))
     ]
 
     room_temp = room[0:2]
@@ -173,7 +171,8 @@ def plot_temp_hum(start_date, end_date, room="T1RH_1"):
 def area_plot(start_date, end_date):
 
     selected_data = energydata[
-        (energydata["day"] <= end_date) & (energydata["day"] >= start_date)
+        (energydata["day"] <= pd.to_datetime(end_date))
+        & (energydata["day"] >= pd.to_datetime(start_date))
     ]
 
     energy_data_subset = selected_data[["Appliances", "lights", "month"]]
