@@ -6,7 +6,7 @@ Chad Wheeler: [https://py-prototype.herokuapp.com/](https://py-prototype.herokua
 
 Nelson Tang: [https://data551-milestone2.herokuapp.com/](https://data551-milestone2.herokuapp.com/)
 
-Nyanda Redwood: [https://dashboard.heroku.com/apps/energy-app/deploy/heroku-git](https://energy-app.herokuapp.com/)
+Nyanda Redwood: [energy-app](https://energy-app.herokuapp.com/)
 
 ## Who are we
 
