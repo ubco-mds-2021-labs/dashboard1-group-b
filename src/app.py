@@ -7,12 +7,15 @@ from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
 from datetime import date
-from altair_data_server import data_server
 
-# Save a vega-lite spec and a PNG blob for each plot in the notebook
+
 alt.renderers.enable("mimetype")
-# Handle large data sets without embedding them in the notebook
+
 # alt.data_transformers.enable("data_server")
+
+alt.data_transformers.enable("json")
+
+alt.data_transformers.disable_max_rows()
 
 
 root_dir = pathlib.Path(__file__).parent.parent
@@ -275,7 +278,7 @@ random_text = dcc.Markdown(
         **Collaborators:**  
         Harpreet Kaur  
         Chad Wheeler  
-        Neslson Tang  
+        Nelson Tang  
         Nyanda Redwood   
     """
 )
