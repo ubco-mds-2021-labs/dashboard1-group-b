@@ -11,7 +11,7 @@ from datetime import date
 
 alt.renderers.enable("mimetype")
 
-alt.data_transformers.enable("data_server")
+alt.data_transformers.enable("data_server_proxied")
 
 # alt.data_transformers.enable("json")
 
