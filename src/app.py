@@ -229,6 +229,20 @@ def plot_temp_hum(start_date, end_date, room="T1RH_1"):
 
 def area_plot(start_date, end_date):
 
+    """
+    Presents the comparitive study of the light and appliances energy consumed in relation to individual month.
+
+    Parameters
+    ----------
+    df : pd.DataFrame(selected_data)
+        Groups the initial energydata_complete data by month name.
+
+    Returns
+    -------
+    Presents the area chart for the energy consumed by lights and appliances.
+
+    """    
+
     selected_data = energydata[
         (energydata["day"] <= pd.to_datetime(end_date))
         & (energydata["day"] >= pd.to_datetime(start_date))
@@ -279,7 +293,7 @@ def area_plot(start_date, end_date):
 
     return plot.to_html()
 
-
+# line plot for temperature and humidity for day
 temp_hum = html.Iframe(
     id="temp_hum",
     srcDoc=plot_temp_hum(
@@ -306,6 +320,7 @@ energy_pie = html.Iframe(
     style={"width": "100%", "height": "400px"},
 )
 
+# line plot for temperature inside and outside for day
 temp_hum_out = html.Iframe(
     id="altair_chart",
     srcDoc=plot_outsidetemp(
@@ -316,6 +331,7 @@ temp_hum_out = html.Iframe(
     style={"width": "100%", "height": "400px"},
 )
 
+# area plot for appliances and energy consumption for day
 energy_month = html.Iframe(
     id="energy_month",
     srcDoc=area_plot(
