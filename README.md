@@ -6,6 +6,8 @@ Chad Wheeler: [https://py-prototype.herokuapp.com/](https://py-prototype.herokua
 
 Nelson Tang: [https://data551-milestone2.herokuapp.com/](https://data551-milestone2.herokuapp.com/)
 
+Nyanda Redwood: [https://dashboard.heroku.com/apps/energy-app/deploy/heroku-git]
+
 ## Who are we
 
 - Chad: "An intelligent and witty person that works on the betterment of oneself and those around him." -Jacob
