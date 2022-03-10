@@ -1,11 +1,19 @@
 # Belgium's Energy Consumption Visualization (Group B)
 
+### Deployed App Links
+
+Chad Wheeler: [https://py-prototype.herokuapp.com/](https://py-prototype.herokuapp.com/)
+
+Nelson Tang: [https://data551-milestone2.herokuapp.com/](https://data551-milestone2.herokuapp.com/)
+
+Nyanda Redwood: [energy-app](https://energy-app.herokuapp.com/)
+
 ## Who are we
 
 - Chad: "An intelligent and witty person that works on the betterment of oneself and those around him." -Jacob
 - Harpreet: Passionate mathematician on the path of becoming a statistician.
 - Nelson: Definitely a data engineer on my right track in the near future.
-- Nyanda: Life long learner.
+- Nyanda: Life long learner vested with a growth mentality.
 
 ## What are we doing and Why
 
