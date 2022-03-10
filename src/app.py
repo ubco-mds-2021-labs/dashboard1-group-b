@@ -32,6 +32,22 @@ server = app.server
 # bar chart for day of week
 def bar_plot_altair(start_date, end_date):
     # select date range
+
+    """
+    Presents the plot for day_of_week and sums the energy consumption. 
+
+    Parameters
+    ----------
+    df : pd.DataFrame(selected_data)
+        Groups the initial 
+        energydata_complete data by day_of_week.
+
+    Returns
+    -------
+    The summarized bar-plot.
+
+    """
+
     selected_data = energydata[
         (energydata["day"] <= pd.to_datetime(end_date))
         & (energydata["day"] >= pd.to_datetime(start_date))
@@ -69,6 +85,21 @@ def bar_plot_altair(start_date, end_date):
 
 def plot_outsidetemp(start_date, end_date, xcol="T_out"):
     # select date range
+
+    """
+    Presents the trend describing a comparitive study of the temperature and humidity outside.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Uses initial energydata_complete data.
+
+    Returns
+    -------
+    The summarized area plot.
+
+    """
+
     selected_data = energydata[
         (energydata["day"] <= pd.to_datetime(end_date))
         & (energydata["day"] >= pd.to_datetime(start_date))
@@ -95,6 +126,21 @@ def plot_outsidetemp(start_date, end_date, xcol="T_out"):
 # pie chart for day of week
 def pie_chart(start_date, end_date):
     # select date range
+
+    """
+    Presents the trend describing a comparitive study of the temperature and humidity outside.
+
+    Parameters
+    ----------
+    df : pd.DataFrame(selected_data)
+        Groups the initial dataframe by day_of_week.
+
+    Returns
+    -------
+    The summarized pie chart.
+
+    """
+
     selected_data = energydata[
         (energydata["day"] <= pd.to_datetime(end_date))
         & (energydata["day"] >= pd.to_datetime(start_date))
