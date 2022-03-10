@@ -11,11 +11,11 @@ from datetime import date
 
 alt.renderers.enable("mimetype")
 
-# alt.data_transformers.enable("data_server")
+alt.data_transformers.enable("data_server")
 
-alt.data_transformers.enable("json")
+# alt.data_transformers.enable("json")
 
-alt.data_transformers.disable_max_rows()
+# alt.data_transformers.disable_max_rows()
 
 
 root_dir = pathlib.Path(__file__).parent.parent
