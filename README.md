@@ -33,6 +33,8 @@ The data set was donated in the year 2017 by Luis Candanedo, University of Mons 
 
 ## How to get started with this dashboard
 
+The dashboard currently is dynamic towards selection of the range of date in which users are interested. The user can either select an entire month as a range for changing the display of the plots or extent their view by selecting more than one month duration. As soon as you select a range all the plots will simultaneously modify. You can have a summarized view of the total appliances energy consumed during a particular day of the week for the selected date range in the form of bar chart Watts/hour by the house. Adjancent to it is a pie chart which is explicit towards giving the proportion comparision report of the filter. In addition to this, the view would also look at the monthwise energy consumption in the house. Furthermore, we have a drop down menu for selecting a room around which the user is willing to extract details. The selection based on this dropdown would change the plot displaying the trend of temperature and humidity. The plot displaying the percentage of humdity v/s the temperature outside in Celsius is also dynamic based on these selections.
+
 ## Acknowledgements and references
 
 - <http://archive.ics.uci.edu/ml/datasets/Appliances+energy+prediction>
