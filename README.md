@@ -3,9 +3,10 @@
 ### Deployed App Links
 
 Chad Wheeler: [https://py-prototype.herokuapp.com/](https://py-prototype.herokuapp.com/)
-Harpreet Kaur: [https://powerful-spire-82147.herokuapp.com/]
+
+Harpreet Kaur: [https://powerful-spire-82147.herokuapp.com/](https://powerful-spire-82147.herokuapp.com/)
+
 Nelson Tang: [https://data551-milestone2.herokuapp.com/](https://data551-milestone2.herokuapp.com/)
-Nyanda Redwood:
 
 Nyanda Redwood: [energy-app](https://energy-app.herokuapp.com/)
 
@@ -26,14 +27,13 @@ The dashboard offers an interactive layout where the user can select from the dr
 
 <img src ="docs/milestone_sketch.png" width="500px">
 
-
 ## Insight into data
 
-The data set was donated in the year 2017 by Luis Candanedo, University of Mons (UMONS). It was collected to create regression models of appliances energy use in a low energy building in Belgium. Our dataset includes approximately, 20000 temperature and humidity sensors measurements from a ZigBee wireless network, outside weather conditions (`To` and `RH_out`, `Wind speed`, `Visibility`, `Tdewpoint`) from a nearby airport station (Chievres Airport, Belgium), and recordings of the energy consumed by the lighting fixtures and other appliances operated by the people residing in that house. The recordings have been recorded at 10 min for about 4.5 months (i.e. from January 11, 2016 to May 27, 2016) in a low-energy building. The node transmitted the temperature recording (`T1` to `T9`) in Celsius and humidity (`RH_1` to `RH_9`) in % for every individual room in the house around every 3.3 minutes which were then averaged for 10 minutes periods. The energy data for both appliances (`Appliances`) and lights (`lights`) separately was logged every 10 minutes with m-bus energy meters in the Wh unit. 
+The data set was donated in the year 2017 by Luis Candanedo, University of Mons (UMONS). It was collected to create regression models of appliances energy use in a low energy building in Belgium. Our dataset includes approximately, 20000 temperature and humidity sensors measurements from a ZigBee wireless network, outside weather conditions (`To` and `RH_out`, `Wind speed`, `Visibility`, `Tdewpoint`) from a nearby airport station (Chievres Airport, Belgium), and recordings of the energy consumed by the lighting fixtures and other appliances operated by the people residing in that house. The recordings have been recorded at 10 min for about 4.5 months (i.e. from January 11, 2016 to May 27, 2016) in a low-energy building. The node transmitted the temperature recording (`T1` to `T9`) in Celsius and humidity (`RH_1` to `RH_9`) in % for every individual room in the house around every 3.3 minutes which were then averaged for 10 minutes periods. The energy data for both appliances (`Appliances`) and lights (`lights`) separately was logged every 10 minutes with m-bus energy meters in the Wh unit.
 
 ## How to get started with this dashboard
 
-## Acknowledgements and references 
+## Acknowledgements and references
 
-- http://archive.ics.uci.edu/ml/datasets/Appliances+energy+prediction
-- https://www.sciencedirect.com/science/article/abs/pii/S0378778816308970?via%3Dihub
+- <http://archive.ics.uci.edu/ml/datasets/Appliances+energy+prediction>
+- <https://www.sciencedirect.com/science/article/abs/pii/S0378778816308970?via%3Dihub>
