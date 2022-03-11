@@ -8,9 +8,7 @@ from dash import dcc
 from dash.dependencies import Input, Output
 from datetime import date
 
-
 alt.data_transformers.disable_max_rows()
-
 
 root_dir = pathlib.Path(__file__).parent.parent
 file_path = root_dir.joinpath("data/energydata_complete.csv")
@@ -34,6 +32,24 @@ server = app.server
 # bar chart for day of week
 def bar_plot_altair(start_date, end_date):
     # select date range
+
+    """
+    Presents the plot for day_of_week and sums of the energy consumped separately for all the day of that week. 
+
+    Parameters
+    ----------
+    df : pd.DataFrame(selected_data)
+        Groups the initial 
+        energydata_complete data by day_of_week.
+    start_date : start date selected
+    end_date : end date selected
+
+    Returns
+    -------
+    The summarized bar-plot.
+
+    """
+
     selected_data = energydata[
         (energydata["day"] <= pd.to_datetime(end_date))
         & (energydata["day"] >= pd.to_datetime(start_date))
@@ -71,6 +87,23 @@ def bar_plot_altair(start_date, end_date):
 
 def plot_outsidetemp(start_date, end_date, xcol="T_out"):
     # select date range
+
+    """
+    Presents the trend describing a comparitive study of the temperature and humidity outside.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Uses initial energydata_complete data.
+    start_date : start date selected
+    end_date : end date selected
+
+    Returns
+    -------
+    The summarized area plot.
+
+    """
+
     selected_data = energydata[
         (energydata["day"] <= pd.to_datetime(end_date))
         & (energydata["day"] >= pd.to_datetime(start_date))
@@ -97,6 +130,23 @@ def plot_outsidetemp(start_date, end_date, xcol="T_out"):
 # pie chart for day of week
 def pie_chart(start_date, end_date):
     # select date range
+
+    """
+    Presents the day of the week proportion summary of the energy consumed by the appliances in the house.
+
+    Parameters
+    ----------
+    df : pd.DataFrame(selected_data)
+        Groups the initial dataframe by day_of_week.
+    start_date : start date selected
+    end_date : end date selected
+
+    Returns
+    -------
+    The summarized pie chart.
+
+    """
+
     selected_data = energydata[
         (energydata["day"] <= pd.to_datetime(end_date))
         & (energydata["day"] >= pd.to_datetime(start_date))
@@ -133,6 +183,23 @@ def pie_chart(start_date, end_date):
 
 def plot_temp_hum(start_date, end_date, room="T1RH_1"):
     # select date range
+
+    """
+    Presents the temperature and humidity comparision in relation to the date.
+
+    Parameters
+    ----------
+    df : pd.DataFrame(selected_data)
+        Uses initial energydata_complete data.
+    start_date : start date selected
+    end_date : end date selected
+
+    Returns
+    -------
+    Presents the trend charts for the temperature and humidity.
+
+    """
+
     selected_data = energydata[
         (energydata["day"] <= pd.to_datetime(end_date))
         & (energydata["day"] >= pd.to_datetime(start_date))
@@ -169,6 +236,22 @@ def plot_temp_hum(start_date, end_date, room="T1RH_1"):
 
 
 def area_plot(start_date, end_date):
+
+    """
+    Presents the comparitive study of the light and appliances energy consumed in relation to individual month.
+
+    Parameters
+    ----------
+    df : pd.DataFrame(selected_data)
+        Subset of the initial energydata_complete data by month name.
+    start_date : start date selected
+    end_date : end date selected
+
+    Returns
+    -------
+    Presents the area chart for the energy consumed by lights and appliances.
+
+    """    
 
     selected_data = energydata[
         (energydata["day"] <= pd.to_datetime(end_date))
@@ -220,7 +303,7 @@ def area_plot(start_date, end_date):
 
     return plot.to_html()
 
-
+# line plot for temperature and humidity for day
 temp_hum = html.Iframe(
     id="temp_hum",
     srcDoc=plot_temp_hum(
@@ -247,6 +330,7 @@ energy_pie = html.Iframe(
     style={"width": "100%", "height": "400px"},
 )
 
+# line plot for temperature inside and outside for day
 temp_hum_out = html.Iframe(
     id="altair_chart",
     srcDoc=plot_outsidetemp(
@@ -257,6 +341,7 @@ temp_hum_out = html.Iframe(
     style={"width": "100%", "height": "400px"},
 )
 
+# area plot for appliances and energy consumption for day
 energy_month = html.Iframe(
     id="energy_month",
     srcDoc=area_plot(
@@ -267,7 +352,6 @@ energy_month = html.Iframe(
 
 header = dcc.Markdown(
     """
-
         # Energy Use of Appliance in a Low-Energy House        
     """
 )
@@ -284,10 +368,7 @@ random_text = dcc.Markdown(
 
 date_range = dcc.Markdown(
     """
-
         **Select date range:** 
-
-
         """
 )
 
@@ -330,6 +411,7 @@ date_picker = dcc.DatePickerRange(
     end_date=date(2016, 5, 27),
 )
 
+# layout 
 row = html.Div(
     [
         dbc.Row(
@@ -377,6 +459,22 @@ app.layout = dbc.Container(
 )
 def update_output(room, start_date, end_date):
     # convert the outputs to date object
+
+    """
+    Presents the output by modifying it as per users selection
+
+    Parameters
+    ----------
+    start_date : start date selected
+    end_date : end date selected
+    room : room selected
+
+    Returns
+    -------
+    Presents the area chart for the energy consumed by lights and appliances.
+
+    """ 
+
     start_date_object = date.fromisoformat(start_date)
     end_date_object = date.fromisoformat(end_date)
     return (
