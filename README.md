@@ -19,7 +19,11 @@ Nyanda Redwood: [energy-app](https://energy-app.herokuapp.com/)
 
 ## What are we doing and Why
 
-It is really important for the electricity grid operators to determine the amount of electricity fed into the electricity grid otherwise it might lead to a power blackout. The served purpose for this visualization would be to help the energy management system of Belgium to determine the adequate size of photovoltaic and energy storage to diminish the power flow into the grid during the various seasons of the year. Moreover, since the data is collected from a low-energy house it would help the management to address the challenge and decide upon a minimum threshold per household for load control if required in any unforeseen emergency situation. For instance, in case the management is willing to perform certain changes in the services or is willing to keep the power grid under maintenance then they would require a backup system that has the capacity to handle the least amount of energy load per household which is dependent on that power grid which is under maintenance. Our main focus would be to help the team to find out only the necessary amount of energy required by a Belgium resident. Our app will allow the user/the operator's supervising team to flexibly filter their search and view different aspects of the data by filtering and re-ordering on different variables.
+We built a dashboard to visualize data related to a low energy-house in Belgium. Our purpose is to provide analytical insights, visually, for ease of use in cases such as the determination of the adequate photovoltaic and energy storage size. Ideally, this could be of utmost importance to Belgium's energy management system. This is particularly true in the context of diminishing the inflow of power to the grid across the four seasons. This is premised on avoiding power balckouts. On the ground, this could be of immediate use to electricity grid operators in their calculations as they strategize how to avoid power blackouts.
+
+What is unique about our proposal is the use of a low-energy household to generate the data. This usage could be valuable in deciding upon a minimum threshold for energy consumption per household. This can be of further use in managing load control within unforseen emergency situations as well as in the creation of backup systems.  
+
+Our app allow users, such as an operator's supervising team, to flexibly filter their search and view different aspects of the data by filtering and re-ordering on different variables.
 
 ## How can you get involved
 
@@ -40,7 +44,7 @@ The data set was donated in the year 2017 by Luis Candanedo, University of Mons 
 
 ## How to get started with this dashboard
 
-The dashboard offers dynamic date range selection, allowing you to input dates according to your interest. Date range selections can go from a single day to span an entire month or even several months. Each date range selection simultaneously updates all plots; there are five plots in total.
+This dashboard offers dynamic date range selection, allowing you to input dates according to your interest. Date range selections can go from a single day to span an entire month or even several months. Each date range selection simultaneously updates all plots; there are five plots in total.
 
 For the total energy consumption of all appliance, you can view the bar chart within the dashboard. This displays Watts per hour for the house according to your date range selection. Adjancent to the bar chart is a pie chart, which demonstrates a proportional comparision of the filtered selection.
 
