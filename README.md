@@ -25,7 +25,7 @@ It is really important for the electricity grid operators to determine the amoun
 
 The dashboard offers an interactive layout where the user can select from the dropdown the room they would like to view a summarized analysis. The plot next to the selection would update the temperature v/s humidity plot for the selected room. Expanded plots would be displayed showing the other charts relating to the energy usage for the house. The dashboard would also provide you the flexibility to pick and choose the slected range of dates for which you had like to view the temperature and energy consumption differences. For instance, analyzing the variation for temperature and energy consumption for the winter season(selecting January month) to the spring time(selecting April month). The dashboard also serves the purpose of providing you with a summarized day of the week report as per your selection. This would help you to have an analysed energy management system planning for the Belegians separately for the weekdays and over the weekends as things vary over the week off in regards to the energy consumption when people prefer to stay inside their house and relax.
 
-<img src ="docs/milestone_sketch.png" width="500px">
+<img src ="docs/layout2.png" width="500px">
 
 ## Insight into data
 
