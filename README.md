@@ -23,7 +23,14 @@ It is really important for the electricity grid operators to determine the amoun
 
 ## How can you get involved
 
-The dashboard offers an interactive layout where the user can select from the dropdown the room they would like to view a summarized analysis. The plot next to the selection would update the temperature v/s humidity plot for the selected room. There are various plots that will display the information on the level of energy consumed in the house. The dashboard would also provide you the flexibility to pick and choose the selected range of dates for which you had liked to view the temperature and energy consumption comparisions. For instance, analyzing the variation for temperature and energy consumption for the winter season(selecting January month) to the spring time(selecting April month). The dashboard also serves the purpose of providing you with a summarized day of the week report as per your selection. This would help you to have an analysed energy management system planning for the Belegians separately for the weekdays and over the weekends as things vary over the week off in regards to the energy consumption when people prefer to stay inside their house and relax.
+If you are interested in analyzing the variation of temperature and energy consumption for parts of the winter season(January to February) or parts of the the spring season(March to April), this dashboard can be of help.
+
+With this dashboard, you recieve an interactive layout of various charts that represent several different types of information related to energy consumption. Using a dropdown menu, you can choose from a compilation of nine rooms and/or from a compilation of four months, separately.
+
+This dashboard provides you with concise reports based on day(s), week(s), and month(s). This supports analytical interests related to energy management systems within the context of a low-energy house in Belgium. For example, the vizualizations offer the granularity for comparitive insights based on weekend energy consumption versus weekday energy consumption.
+
+
+
 
 <img src ="docs/layout2.png" width="500px">
 
@@ -35,7 +42,7 @@ The data set was donated in the year 2017 by Luis Candanedo, University of Mons 
 
 The dashboard offers dynamic date range selection, allowing you to input dates according to your interest. Date range selections can go from a single day to span an entire month or even several months. Each date range selection simultaneously updates all plots; there are five plots in total.
 
-For the total energy consuption of all appliance, you can view the bar chart within the dashboard. This displays Watts per hour for the house according to your date range selection. Adjancent to the bar chart is a pie chart, which demonstrates a proportional comparision of the filtered selection.
+For the total energy consumption of all appliance, you can view the bar chart within the dashboard. This displays Watts per hour for the house according to your date range selection. Adjancent to the bar chart is a pie chart, which demonstrates a proportional comparision of the filtered selection.
 
 For a month-wise comparison of energy consumption by appliance and light, you can view the area chart labeled "Energy Used in House".
 
