@@ -23,7 +23,7 @@ We built a dashboard to visualize data related to a low energy-house in Belgium.
 
 What is unique about our proposal is the use of a low-energy household to generate the data. This usage could be valuable in deciding upon a minimum threshold for energy consumption per household. This can be of further use in managing load control within unforseen emergency situations as well as in the creation of backup systems.  
 
-Our app allow users, such as an operator's supervising team, to flexibly filter their search and view different aspects of the data by filtering and re-ordering on different variables.
+Our app allows users, such as an operator's supervising team, to flexibly filter their search and view different aspects of the data by filtering and re-ordering on different variables.
 
 ## How can you get involved
 
